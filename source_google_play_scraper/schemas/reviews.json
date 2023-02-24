@@ -1,0 +1,57 @@
+{
+  "$schema" : "http://json-schema.org/draft-07/schema#",
+  "title" : "Google Play Reviews Stream",
+  "description" : "Google Play Reviews Stream schema",
+  "type" : "object",
+  "required" : [
+    "reviewId",
+    "at"
+  ],
+  "additionalProperties" : false,
+  "properties" : {
+    "reviewId" : {
+      "type" : "string"
+    },
+    "userName" : {
+      "type" : "string"
+    },
+    "userImage" : {
+      "type" : "string"
+    },
+    "content" : {
+      "type" : "string"
+    },
+    "score" : {
+      "type" : "integer"
+    },
+    "thumbsUpCount" : {
+      "type" : "integer"
+    },
+    "reviewCreatedVersion" : {
+      "type" : [
+        "string",
+        "null"
+      ]
+    },
+    "at" : {
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "replyContent" : {
+      "type" : [
+        "string",
+        "null"
+      ]
+    },
+    "repliedAt" : {
+      "type" : [
+        "string",
+        "null"
+      ],
+      "format" : "date-time"
+    },
+    "language" : {
+      "type" : "string"
+    }
+  }
+}

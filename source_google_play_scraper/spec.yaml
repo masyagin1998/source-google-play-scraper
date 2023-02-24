@@ -1,0 +1,138 @@
+documentationUrl: https://docsurl.com
+connectionSpecification:
+  $schema: http://json-schema.org/draft-07/schema#
+  title: Google Play Scraper Spec
+  description: Google Play Scraper Spec schema
+  type: object
+  required:
+    - app_id
+    - languages
+    - start_date
+  additionalProperties: true
+  properties:
+    app_id:
+      title: App ID
+      description: This is Your app or game ID, for which You need reviews from Google Play. For example, in https://play.google.com/store/apps/details?id={MY_APP_ID}&hl=en&gl=US, where MY_APP_ID is the value of Your app or game ID.
+      order: 0
+      type: string
+      examples:
+        - com.zhiliaoapp.musically
+        - com.instagram.android
+        - com.whatsapp
+        - com.snapchat.android
+        - com.sololearn
+    languages:
+      title: Languages
+      description: This is Your app or game reviews languages, in which You will get reviews from Google Play. For example, in https://play.google.com/store/apps/details?id=com.exa.nanamarket&hl={MY_LANGUAGE_I}&gl=US, where MY_LANGUAGE_I is one of the languages from array.
+      order: 1
+      type: object
+      oneOf:
+        - title: All Languages
+          description: All languages from "aa" to "zu" will be enumerated for Your app or game reviews languages.
+          type: object
+          properties:
+            type:
+              const: all
+        - title: Selected Languages
+          description: Only selected languages will be enumerated for Your app or game reviews languages.
+          type: object
+          required:
+            - selected
+          additionalProperties: true
+          properties:
+            type:
+              type: string
+              const: selected
+              order: 0
+            selected:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                type: string
+                enum:
+                  - af
+                  - am
+                  - ar
+                  - bg
+                  - ca
+                  - cs
+                  - da
+                  - de
+                  - el
+                  - en
+                  - es
+                  - et
+                  - fi
+                  - fil
+                  - fr
+                  - he
+                  - hi
+                  - hr
+                  - hu
+                  - id
+                  - is
+                  - it
+                  - ja
+                  - ko
+                  - lt
+                  - lv
+                  - ms
+                  - nl
+                  - no
+                  - pl
+                  - pt
+                  - ro
+                  - ru
+                  - sk
+                  - sl
+                  - sr
+                  - sv
+                  - sw
+                  - th
+                  - tr
+                  - uk
+                  - vi
+                  - zh
+                  - zh_hk
+                  - zu
+    start_date:
+      title: Start Date
+      description: This is start date, from which You will get reviews for Your app or game. It should be in format YYYY-MM-DD.
+      order: 2
+      type: string
+      pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      examples:
+        - 2022-12-01
+        - 2022-01-01
+        - 1998-12-04
+        - 1967-05-05
+        - 1960-09-21
+    timeout_milliseconds:
+      title: Timeout in Milliseconds
+      description: Timeout in milliseconds between two subsequent requests to Google Play.
+      order: 3
+      type: integer
+      default: 0
+      minimum: 0
+      examples:
+        - 1000
+        - 100
+        - 10
+        - 1
+        - 0
+    max_reviews_per_request:
+      title: Max Reviews per Request
+      description: Maximum number of reviews loaded per request to Google Play.
+      order: 4
+      type: integer
+      default: 100
+      minimum: 1
+      maximum: 100
+      examples:
+        - 100
+        - 75
+        - 50
+        - 25
+        - 1
+
